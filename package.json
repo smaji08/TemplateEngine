@@ -1,0 +1,25 @@
+{
+  "name": "templateengine",
+  "version": "1.0.0",
+  "description": "To build a software engineering team generator command line application.",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest --verbose test/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smaji08/TemplateEngine.git"
+  },
+  "author": "Augustine Stella Maria",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smaji08/TemplateEngine/issues"
+  },
+  "homepage": "https://github.com/smaji08/TemplateEngine#readme",
+  "dependencies": {
+    "inquirer": "^7.0.4"
+  },
+  "devDependencies": {
+    "jest": "^25.1.0"
+  }
+}
