@@ -1,10 +1,12 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
+const util = require("util");
+const writeFile = util.promisify(fs.writeFile);
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
-const Employee = require("./lib/Employee");
 const Questions = require("./lib/questions");
+const genHtml = require ("./lib/emptemp");
 
 var newengineer =[];
 var newintern =[];
@@ -55,12 +57,9 @@ async function init(){
                 }
             }
         } 
-            
-        console.log(newmanager[0].getRole());
-        console.log(newengineer);
-        console.log(newintern);
-        // const html =  genHtml.generateHTML(newmanager,newengineer,newintern);
-        // await writeFile("index.html",html);
+        var combinedarray = newmanager.concat(newengineer,newintern);
+        const html =  genHtml.generateHTML(combinedarray);
+        await writeFile("./output/team.html",html);
     }
     catch(error){
         console.log(error);
