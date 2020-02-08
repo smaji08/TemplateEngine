@@ -8,11 +8,11 @@ const Intern = require("./lib/Intern");
 const Questions = require("./lib/questions");
 const genHtml = require ("./lib/emptemp");
 
-var newengineer =[];
-var newintern =[];
-var newmanager =[];
+
+var newemployee= [];
 var engineerDetails={};
 var internDetails ={};
+var id = 0;
 
 function initiateTeam(){
     return new Promise(resolve => {
@@ -34,9 +34,10 @@ function getIntern(){
 
 async function init(){
     try{
+        
         console.log("Lets build a team!!");
         const managerDetails = await initiateTeam();
-        newmanager.push(new Manager(managerDetails.Name,managerDetails.Id, 
+        newemployee.push(new Manager(managerDetails.Name,++id, 
                                     managerDetails.Email,managerDetails.OfficeNum));
         
         var addrecords = true;
@@ -57,7 +58,22 @@ async function init(){
                 }
             }
         } 
-        var combinedarray = newmanager.concat(newengineer,newintern);
+        
+        let sortedarrayM=[];
+        let sortedarrayE=[];
+        let sortedarrayI=[];
+        newemployee.forEach(employee => {
+            if (employee instanceof Manager){
+                sortedarrayM.push(employee);
+            }
+            else if(employee instanceof Engineer){
+                sortedarrayE.push(employee);
+            }
+            else{
+                sortedarrayI.push(employee);
+            }
+        });
+        let combinedarray = [...sortedarrayM,...sortedarrayE,...sortedarrayI];
         const html =  genHtml.generateHTML(combinedarray);
         await writeFile("./output/team.html",html);
     }
@@ -68,14 +84,14 @@ async function init(){
 
 async function setEngineer(){
     engineerDetails = await getEngineer();
-    newengineer.push(new Engineer(engineerDetails.Name, engineerDetails.Id,
+    newemployee.push(new Engineer(engineerDetails.Name, ++id,
                         engineerDetails.Email,engineerDetails.gitHub));
 
 }
 
 async function setIntern(){
     internDetails = await getIntern();
-    newintern.push(new Intern(internDetails.Name, internDetails.Id,
+    newemployee.push(new Intern(internDetails.Name, ++id,
                     internDetails.Email,internDetails.School));
 }
 init();
