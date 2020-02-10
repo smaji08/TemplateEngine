@@ -23,7 +23,6 @@
     position: relative;
     padding: 10px;
     box-sizing: border-box;
-    /* align-content:space-around; */
 }
 
 .grid-item-content {
@@ -42,7 +41,7 @@
 
 
 h1, h2, h3, h4 {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Slabo 27px', serif;
     letter-spacing: 1.2px;
     text-align: center;
     font-weight: bolder;

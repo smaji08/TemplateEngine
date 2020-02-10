@@ -14,6 +14,7 @@ var engineerDetails={};
 var internDetails ={};
 var id = 0;
 
+
 function initiateTeam(){
     return new Promise(resolve => {
         resolve(inquirer.prompt(Questions.quesManager));
@@ -32,6 +33,9 @@ function getIntern(){
     });
 }
 
+//On the assumption of a team having a 1 manager but as many as possible number of Engineers and Interns
+//getting the manager details once and getting other employee details as many as needed
+//and pushing all in one 'newemployee' array
 async function init(){
     try{
         
@@ -59,6 +63,8 @@ async function init(){
             }
         } 
         
+        //segrating first on basis of employee category and then combining all rolewise
+        //which helps in printing each based on role.
         let sortedarrayM=[];
         let sortedarrayE=[];
         let sortedarrayI=[];
@@ -76,6 +82,7 @@ async function init(){
         let combinedarray = [...sortedarrayM,...sortedarrayE,...sortedarrayI];
         const html =  genHtml.generateHTML(combinedarray);
         await writeFile("./output/team.html",html);
+        console.log("team.html generated");
     }
     catch(error){
         console.log(error);
