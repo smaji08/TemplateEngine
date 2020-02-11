@@ -46,12 +46,14 @@ async function init(){
         
         var addrecords = true;
         while(addrecords){
-            if (managerDetails.continueBuild === false){addrecords = false;}
+            if (managerDetails.continueBuild === false){addrecords = false;break;}
             
             if (managerDetails.member === "Engineer" || engineerDetails.member === "Engineer" || internDetails.member === "Engineer"){
+                
                 await setEngineer();
                 if(engineerDetails.continueBuild === false){
                     addrecords = false;
+                    break;
                 }
             }
 
@@ -59,6 +61,7 @@ async function init(){
                 await setIntern();
                 if(internDetails.continueBuild === false){
                     addrecords = false;
+                    break;
                 }
             }
         } 
